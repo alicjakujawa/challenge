@@ -8,7 +8,7 @@ module.exports = {
         title: 'My new car',
         views: 1120,
         likes: 52,
-        created: 2014-09-20
+        created: '2014-09-20',
       },
       {
         id: '2',
@@ -16,7 +16,7 @@ module.exports = {
         title: 'My hobbies',
         views: 300,
         likes: 12,
-        created: 2015-01-10
+        created: '2015-01-10',
       },
       {
         id: '3',
@@ -24,8 +24,8 @@ module.exports = {
         title: 'My job',
         views: 670,
         likes: 18,
-        created: 2015-09-20
-      }
+        created: '2015-09-20',
+      },
     ]));
-  }
+  },
 };
