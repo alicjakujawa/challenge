@@ -1,3 +1,4 @@
-export const COUNTER = {
-  INCREMENT: 'INCREMENT',
+export const POST = {
+  LOAD: 'LOAD_POSTS',
+  ADD: 'ADD_POST'
 };
