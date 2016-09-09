@@ -3,6 +3,10 @@ import './style.sass';
 
 class Table extends Component {
 
+  componentWillMount() {
+    this.props.loadPosts();
+  }
+
   render() {
     return (
       <header className="header">
@@ -13,7 +17,7 @@ class Table extends Component {
 }
 
 Table.propTypes = {
-
+  loadPosts: PropTypes.func.isRequired,
 };
 
 export default Table;

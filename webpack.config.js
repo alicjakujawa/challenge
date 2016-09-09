@@ -26,7 +26,10 @@ module.exports = {
       {
         test: /\.(sass|scss)?$/,
         loader: ExtractTextPlugin.extract("css!sass")
-      }
+      },
+      {
+        test: /\.json$/, loader: "json"
+      },
     ]
   },
   eslint: {

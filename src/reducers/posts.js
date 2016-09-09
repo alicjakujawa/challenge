@@ -6,10 +6,10 @@ const initialState = {
 
 export default function post(state = initialState, action) {
   switch (action.type) {
-    case POST.LOAD:
+    case POST.DATA_LOADED:
       return {
         ...state,
-        posts: state.posts
+        posts: state.posts,
       };
     default:
       return state;

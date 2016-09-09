@@ -1,13 +1,15 @@
-import { combineReducers, createStore, compose } from 'redux';
+import { combineReducers, createStore, compose, applyMiddleware } from 'redux';
 import DevTools from '../containers/DevTools';
 import * as reducers from '../reducers';
-
-const persistedState = localStorage.getItem('posts') ? JSON.parse(localStorage.getItem('posts')) : {};
+import thunk from 'redux-thunk';
 
 const reducer = combineReducers(reducers);
+const middleware = applyMiddleware(thunk);
+
 const enhancer = compose(
+  middleware,
   DevTools.instrument()
 );
 
-const store = createStore(reducer, persistedState, enhancer);
+const store = createStore(reducer, enhancer);
 export default store;

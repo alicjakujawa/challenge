@@ -2,22 +2,33 @@ import React, { Component, PropTypes } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
+import { load } from '../actions/PostActions';
 import Table from '../components/Table';
 
 class TableContainer extends Component {
   render() {
+    const { posts } = this.props;
+
     return (
-      <div>
-        <h1>Table</h1>
-        <Table />
-      </div>
+      <Table
+        posts={posts}
+        loadPosts={() => this.props.loadPosts()}
+      />
     );
   }
 }
 
 TableContainer.propTypes = {
-  dispatch: PropTypes.func.isRequired,
+  posts: PropTypes.object.isRequired,
+  loadPosts: PropTypes.func.isRequired,
 };
 
+const mapStateToProps = (state) => ({
+  posts: state.posts,
+});
 
-export default connect()(TableContainer);
+const mapDispatchToProps = (dispatch) => ({
+  loadPosts: bindActionCreators(load, dispatch),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(TableContainer);
