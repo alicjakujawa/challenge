@@ -3,14 +3,13 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
 import { load } from '../actions/PostActions';
-import Table from '../components/Table';
+import PostsTable from '../components/Table';
 
 class TableContainer extends Component {
   render() {
     const { posts } = this.props;
-
     return (
-      <Table
+      <PostsTable
         posts={posts}
         loadPosts={() => this.props.loadPosts()}
       />

@@ -1,9 +1,9 @@
 import { POST } from '../constants/ActionTypes';
 import PostApi from '../api/PostApi';
 
-export function add() {
+export function postAdded() {
   return {
-    type: POST.ADD,
+    type: POST.ADDED,
   };
 }
 
@@ -19,5 +19,12 @@ export function load() {
     PostApi.getPosts(posts => {
       dispatch(receivePosts(posts));
     });
+  };
+}
+
+export function addPost(post) {
+  return dispatch => {
+    console.log(post);
+    dispatch(postAdded());
   };
 }

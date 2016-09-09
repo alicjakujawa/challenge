@@ -9,7 +9,13 @@ export default function post(state = initialState, action) {
     case POST.DATA_LOADED:
       return {
         ...state,
-        posts: state.posts,
+        posts: action.posts,
+      };
+
+    case POST.POST_ADDED:
+      return {
+        ...state,
+        test: 'sucess',
       };
     default:
       return state;
