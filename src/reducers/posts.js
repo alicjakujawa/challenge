@@ -1,12 +1,43 @@
 import { POST } from '../constants/ActionTypes';
 
-export default function post(state = [], action) {
+let posts = [];
+let page = 0;
+
+const initialState = {
+  items: [],
+  nextPage: false,
+  prevPage: false,
+};
+
+export default function post(state = initialState, action) {
   switch (action.type) {
     case POST.DATA_LOADED:
-      return state.concat(action.posts);
+      posts = action.posts;
+      const cuttedPosts = action.posts.slice(0, page + 2);
+      return {
+        ...state,
+        items: cuttedPosts,
+        nextPage: posts.slice((page+1) * 2, page + 3).length > 0,
+      };
 
     case POST.ADDED:
       return [...state, action.post];
+
+    case POST.NEXT:
+      page++;
+      return {
+        items: posts.slice(page * 2, page + 2),
+        nextPage: posts.slice((page+1) * 2, page + 2).length > 0,
+        prevPage: true,
+      };
+
+    case POST.PREV:
+      page--;
+      return {
+        items: posts.slice(page * 2, page + 2),
+        nextPage: true,
+        prevPage: page > 0,
+      };
 
     default:
       return state;

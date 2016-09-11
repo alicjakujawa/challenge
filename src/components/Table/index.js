@@ -1,6 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import './style.sass';
 import Table from 'react-bootstrap/lib/Table';
+import Pagination from '../Pagination';
 
 class PostsTable extends Component {
 
@@ -23,7 +24,7 @@ class PostsTable extends Component {
             </tr>
           </thead>
           <tbody>
-            {this.props.posts ? this.props.posts.map((post, i) =>
+            {this.props.posts.items ? this.props.posts.items.map((post, i) =>
               <tr key={i}>
                 <th>{post.id}</th>
                 <th>{post.username}</th>
@@ -35,6 +36,7 @@ class PostsTable extends Component {
             ) : null}
           </tbody>
         </Table>
+        <Pagination />
       </div>
     );
   }
@@ -42,7 +44,7 @@ class PostsTable extends Component {
 
 PostsTable.propTypes = {
   loadPosts: PropTypes.func.isRequired,
-  posts: PropTypes.array.isRequired,
+  posts: PropTypes.object.isRequired,
 };
 
 export default PostsTable;

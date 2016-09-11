@@ -15,6 +15,18 @@ export function receivePosts(data) {
   };
 }
 
+export function next() {
+  return {
+    type: POST.NEXT,
+  };
+}
+
+export function prev() {
+  return {
+    type: POST.PREV,
+  };
+}
+
 export function load() {
   return dispatch => {
     PostApi.getPosts()

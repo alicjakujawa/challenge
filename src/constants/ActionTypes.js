@@ -2,4 +2,6 @@ export const POST = {
   LOAD: 'LOAD_POSTS',
   ADDED: 'POST_ADDED',
   DATA_LOADED: 'DATA_LOADED',
+  NEXT: 'NEXT_PAGE',
+  PREV: 'PREV_PAGE',
 };
