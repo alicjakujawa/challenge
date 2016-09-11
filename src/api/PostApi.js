@@ -1,9 +1,11 @@
-import _posts from './posts.json';
-
-const TIMEOUT = 100;
+import axios from 'axios';
 
 export default {
-  getPosts(callback, timeout) {
-    setTimeout(() => callback(_posts), timeout || TIMEOUT);
+  getPosts() {
+    return axios.get('http://localhost:3004/posts');
+  },
+
+  addPost(post) {
+    return axios.post('http://localhost:3004/posts', post);
   },
 };

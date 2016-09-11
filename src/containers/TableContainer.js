@@ -18,7 +18,7 @@ class TableContainer extends Component {
 }
 
 TableContainer.propTypes = {
-  posts: PropTypes.object.isRequired,
+  posts: PropTypes.array.isRequired,
   loadPosts: PropTypes.func.isRequired,
 };
 

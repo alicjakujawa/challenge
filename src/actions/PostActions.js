@@ -1,9 +1,10 @@
 import { POST } from '../constants/ActionTypes';
 import PostApi from '../api/PostApi';
 
-export function postAdded() {
+export function postAdded(post) {
   return {
     type: POST.ADDED,
+    post,
   };
 }
 
@@ -16,15 +17,18 @@ export function receivePosts(data) {
 
 export function load() {
   return dispatch => {
-    PostApi.getPosts(posts => {
-      dispatch(receivePosts(posts));
-    });
+    PostApi.getPosts()
+      .then((response) => {
+        dispatch(receivePosts(response.data));
+      });
   };
 }
 
 export function addPost(post) {
   return dispatch => {
-    console.log(post);
-    dispatch(postAdded());
+    PostApi.addPost(post)
+      .then(() => {
+        dispatch(postAdded(post));
+      });
   };
 }

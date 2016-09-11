@@ -23,7 +23,7 @@ class PostsTable extends Component {
             </tr>
           </thead>
           <tbody>
-            {this.props.posts.posts.map((post, i) =>
+            {this.props.posts ? this.props.posts.map((post, i) =>
               <tr key={i}>
                 <th>{post.id}</th>
                 <th>{post.username}</th>
@@ -32,7 +32,7 @@ class PostsTable extends Component {
                 <th>{post.likes}</th>
                 <th>{post.created}</th>
               </tr>
-            )}
+            ) : null}
           </tbody>
         </Table>
       </div>
@@ -42,7 +42,7 @@ class PostsTable extends Component {
 
 PostsTable.propTypes = {
   loadPosts: PropTypes.func.isRequired,
-  posts: PropTypes.object.isRequired,
+  posts: PropTypes.array.isRequired,
 };
 
 export default PostsTable;

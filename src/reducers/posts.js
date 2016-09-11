@@ -1,22 +1,13 @@
 import { POST } from '../constants/ActionTypes';
 
-const initialState = {
-  posts: [],
-};
-
-export default function post(state = initialState, action) {
+export default function post(state = [], action) {
   switch (action.type) {
     case POST.DATA_LOADED:
-      return {
-        ...state,
-        posts: action.posts,
-      };
+      return state.concat(action.posts);
 
-    case POST.POST_ADDED:
-      return {
-        ...state,
-        test: 'sucess',
-      };
+    case POST.ADDED:
+      return [...state, action.post];
+
     default:
       return state;
   }

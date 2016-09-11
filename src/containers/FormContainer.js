@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 
 import { addPost } from '../actions/PostActions';
@@ -7,6 +7,7 @@ import ControlLabel from 'react-bootstrap/lib/ControlLabel';
 import FormControl from 'react-bootstrap/lib/FormControl';
 import Button from 'react-bootstrap/lib/Button';
 import moment from 'moment';
+import shortid from 'shortid';
 
 class FormContainer extends Component {
 
@@ -31,13 +32,19 @@ class FormContainer extends Component {
   addRecord(e) {
     e.preventDefault();
     const post = {
-      username: this.state.name,
+      id: shortid.generate(),
+      username: this.state.username,
       title: this.state.title,
       views: 0,
       likes: 0,
       created: moment().format('YYYY-MM-DD'),
     };
     this.props.dispatch(addPost(post));
+    this.clearForm();
+  }
+
+  clearForm() {
+    this.setState({ username: '', title: '' });
   }
 
   render() {
@@ -76,5 +83,9 @@ class FormContainer extends Component {
     );
   }
 }
+
+FormContainer.propTypes = {
+  dispatch: PropTypes.func.isRequired,
+};
 
 export default connect()(FormContainer);
