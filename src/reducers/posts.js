@@ -17,24 +17,28 @@ export default function post(state = initialState, action) {
       return {
         ...state,
         items: cuttedPosts,
-        nextPage: posts.slice((page+1) * 2, page + 3).length > 0,
+        nextPage: posts.slice((page + 1) * 2, page + 3).length > 0,
       };
 
     case POST.ADDED:
-      return [...state, action.post];
+      posts.unshift(action.post);
+      return {
+        ...state,
+        items: posts.slice(page * 2, page + 2),
+      };
 
     case POST.NEXT:
       page++;
       return {
-        items: posts.slice(page * 2, page + 2),
-        nextPage: posts.slice((page+1) * 2, page + 2).length > 0,
+        items: posts.slice(page * 2, page * 2 + 2),
+        nextPage: posts.slice((page + 1) * 2, (page + 1) * 2 + 2).length > 0,
         prevPage: true,
       };
 
     case POST.PREV:
       page--;
       return {
-        items: posts.slice(page * 2, page + 2),
+        items: posts.slice(page * 2, page * 2 + 2),
         nextPage: true,
         prevPage: page > 0,
       };
