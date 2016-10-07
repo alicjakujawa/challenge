@@ -4,4 +4,5 @@ export const POST = {
   DATA_LOADED: 'DATA_LOADED',
   NEXT: 'NEXT_PAGE',
   PREV: 'PREV_PAGE',
+  CHANGE_LIMIT: 'CHANGE_LIMIT:',
 };

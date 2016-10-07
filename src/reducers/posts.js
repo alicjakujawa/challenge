@@ -7,42 +7,60 @@ const initialState = {
   items: [],
   nextPage: false,
   prevPage: false,
+  limit: 5,
 };
 
+function checkNext(pageNum, limit) {
+  return posts.slice((pageNum + 1) * limit, (pageNum + 1) * limit + limit).length > 0;
+}
+
 export default function post(state = initialState, action) {
+  const limit = state.limit;
   switch (action.type) {
-    case POST.DATA_LOADED:
+    case POST.DATA_LOADED: {
       posts = action.posts;
-      const cuttedPosts = action.posts.slice(0, page + 2);
+      const cuttedPosts = action.posts.slice(0, page + limit);
       return {
         ...state,
         items: cuttedPosts,
-        nextPage: posts.slice((page + 1) * 2, page + 3).length > 0,
+        nextPage: checkNext(page, limit),
       };
-
-    case POST.ADDED:
+    }
+    case POST.ADDED: {
       posts.unshift(action.post);
       return {
         ...state,
-        items: posts.slice(page * 2, page + 2),
+        items: posts.slice(page * limit, page + limit),
       };
-
-    case POST.NEXT:
+    }
+    case POST.NEXT: {
       page++;
       return {
-        items: posts.slice(page * 2, page * 2 + 2),
-        nextPage: posts.slice((page + 1) * 2, (page + 1) * 2 + 2).length > 0,
+        ...state,
+        items: posts.slice(page * limit, page * limit + limit),
+        nextPage: checkNext(page, limit),
         prevPage: true,
       };
-
-    case POST.PREV:
+    }
+    case POST.PREV: {
       page--;
       return {
-        items: posts.slice(page * 2, page * 2 + 2),
+        ...state,
+        items: posts.slice(page * limit, page * limit + limit),
         nextPage: true,
         prevPage: page > 0,
       };
-
+    }
+    case POST.CHANGE_LIMIT: {
+      const newlimit = action.limit;
+      return {
+        ...state,
+        limit: newlimit,
+        items: posts.slice(page * newlimit, page * newlimit + newlimit),
+        nextPage: checkNext(page, newlimit),
+        prevPage: page > 0,
+      };
+    }
     default:
       return state;
   }

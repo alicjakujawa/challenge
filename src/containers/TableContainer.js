@@ -2,7 +2,7 @@ import React, { Component, PropTypes } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
-import { load } from '../actions/PostActions';
+import * as actionCreators from '../actions/PostActions';
 import PostsTable from '../components/Table';
 
 class TableContainer extends Component {
@@ -11,7 +11,7 @@ class TableContainer extends Component {
     return (
       <PostsTable
         posts={posts}
-        loadPosts={() => this.props.loadPosts()}
+        actions={this.props.actions}
       />
     );
   }
@@ -19,7 +19,7 @@ class TableContainer extends Component {
 
 TableContainer.propTypes = {
   posts: PropTypes.object.isRequired,
-  loadPosts: PropTypes.func.isRequired,
+  actions: PropTypes.object.isRequired,
 };
 
 const mapStateToProps = (state) => ({
@@ -27,7 +27,7 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  loadPosts: bindActionCreators(load, dispatch),
+  actions: bindActionCreators(actionCreators, dispatch),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(TableContainer);

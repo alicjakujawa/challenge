@@ -27,6 +27,13 @@ export function prev() {
   };
 }
 
+export function changeLimit(limit) {
+  return {
+    type: POST.CHANGE_LIMIT,
+    limit,
+  };
+}
+
 export function load() {
   return dispatch => {
     PostApi.getPosts()

@@ -2,11 +2,12 @@ import React, { Component, PropTypes } from 'react';
 import './style.sass';
 import Table from 'react-bootstrap/lib/Table';
 import Pagination from '../Pagination';
+import RowNumberController from '../RowNumberController';
 
 class PostsTable extends Component {
 
   componentWillMount() {
-    this.props.loadPosts();
+    this.props.actions.load();
   }
 
   render() {
@@ -37,13 +38,14 @@ class PostsTable extends Component {
           </tbody>
         </Table>
         <Pagination />
+        <RowNumberController changeLimit={this.props.actions.changeLimit} />
       </div>
     );
   }
 }
 
 PostsTable.propTypes = {
-  loadPosts: PropTypes.func.isRequired,
+  actions: PropTypes.object.isRequired,
   posts: PropTypes.object.isRequired,
 };
 
