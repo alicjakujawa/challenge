@@ -3,20 +3,21 @@ import { connect } from 'react-redux';
 
 import Button from 'react-bootstrap/lib/Button';
 import { next, prev } from '../../actions/PostActions';
+import './style.sass';
 
 class Pagination extends Component {
   render() {
     const { nextPage, prevPage } = this.props;
     return (
-      <div>
+      <div className="pagin">
         {nextPage ?
-          <Button onClick={() => { this.props.dispatch(next()); }}>
-            Next page
+          <Button className="btn-primary pagin__button--next" onClick={() => { this.props.dispatch(next()); }}>
+            <span className="glyphicon glyphicon glyphicon-menu-right" aria-hidden="true" />
           </Button> : null
         }
         {prevPage ?
-          <Button onClick={() => { this.props.dispatch(prev()); }}>
-            Prev page
+          <Button className="btn-primary pagin__button" onClick={() => { this.props.dispatch(prev()); }}>
+            <span className="glyphicon glyphicon glyphicon-menu-left" aria-hidden="true" />
           </Button> : null
         }
       </div>

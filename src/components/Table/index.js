@@ -38,7 +38,11 @@ class PostsTable extends Component {
           </tbody>
         </Table>
         <Pagination />
-        <RowNumberController changeLimit={this.props.actions.changeLimit} />
+        <div className="row">
+          <div className="col-xs-1">
+            <RowNumberController changeLimit={this.props.actions.changeLimit} />
+          </div>
+        </div>
       </div>
     );
   }
